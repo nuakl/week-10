@@ -1,31 +1,16 @@
 # KALA — Toko Web Lilin Aromaterapi Sirkadian
 
-**KALA** adalah toko web lilin aromaterapi berbahasa Indonesia (Rupiah / IDR) dengan konsep **Ritual Sirkadian Siang–Malam** yang adaptif terhadap fase waktu (*Fajar*, *Tengah Hari*, *Senja*, dan *Malam*).
+**KALA** dibangun 100% dengan **HTML, CSS, dan JavaScript murni** (`index.html`, `styles.css`, `app.js`, dan folder `images/` berisi 32 gambar AI), tanpa React, tanpa TypeScript, dan tanpa proses build wajib.
 
-## Cara Menampilkan di GitHub Pages (Penting!)
+## Cara Upload & Langsung Tampil di GitHub Pages
 
-File `index.html` di folder utama adalah berkas sumber (*source*) Vite + React (`.tsx`) sehingga **browser tidak dapat menjalankannya langsung tanpa proses build** (halaman akan tampak kosong bila GitHub Pages diarahkan ke `/ (root)` mentah).
+1. Unggah seluruh file di proyek ini (`index.html`, `styles.css`, `app.js`, dan folder `images/`) ke repository GitHub Anda.
+2. Buka **Settings → Pages** di repository GitHub Anda.
+3. Pada bagian **Build and deployment → Source**, pilih **Deploy from a branch**.
+4. Pilih branch **`main`** dan folder **`/ (root)`**, lalu klik **Save**.
+5. Tunggu ~1 menit dan buka tautan GitHub Pages Anda — web-store langsung tampil utuh!
 
-Gunakan salah satu dari 2 cara berikut agar web langsung tampil sempurna di GitHub Pages:
+## Mengganti 32 Gambar AI dengan Gambar ChatGPT
 
-### Cara 1: Otomatis via GitHub Actions (Disarankan)
-Proyek ini sudah dilengkapi berkas `.github/workflows/deploy.yml`.
-1. Unggah seluruh isi proyek ini (termasuk folder `.github/`) ke repository GitHub Anda (`main` atau `master`).
-2. Di GitHub repository, buka **Settings → Pages**.
-3. Pada bagian **Build and deployment → Source**, ubah dari *Deploy from a branch* menjadi **GitHub Actions**.
-4. Buka tab **Actions** dan tunggu workflow **Deploy KALA ke GitHub Pages** selesai (sekitar 1 menit), lalu buka tautan GitHub Pages Anda.
-
-### Cara 2: Build Lokal lalu Unggah Isi Folder `dist/`
-1. Jalankan di terminal komputer Anda:
-   ```bash
-   npm install
-   npm run build
-   ```
-2. Hasil HTML, CSS, JS, dan seluruh 32 gambar AI siap-pakai akan dibuat di dalam folder **`dist/`** (sudah memakai path relatif `base: './'`).
-3. Unggah **isi** folder `dist/` (file `index.html` hasil build + folder `assets/`) ke branch GitHub Pages Anda atau langsung ke **Vercel / Netlify**.
-
-## Pengelolaan 32 Gambar AI & Penggantian dengan Gambar ChatGPT
-
-Seluruh **32 gambar** (4 Hero Sirkadian, 12 Produk, 3 Wadah Kustom, 9 Bahan Minyak Botani, dan 4 Ritual Bakar & Atelier) di `src/assets/images/` dibuat dengan AI tanpa unduhan eksternal.
-- Untuk melihat daftar prompt ChatGPT, klik **"Katalog 32 Gambar AI & Prompt (GitHub)"** di bagian bawah halaman.
-- Untuk mengganti gambar, simpan gambar baru di `src/assets/images/` dan perbarui `src/data/assetCatalog.ts`, lalu push ulang ke GitHub.
+Seluruh 32 gambar tersimpan dengan nama rapi di dalam folder **`images/`** (misalnya `images/hero-fajar.jpg`, `images/candle-embun-fajar.jpg`, `images/vessel-keramik.jpg`, `images/oil-bergamot.jpg`).
+Untuk mengganti gambar dengan hasil ChatGPT, cukup timpa file di folder **`images/`** dengan nama file yang sama. Daftar lengkap 32 prompt dapat dibuka langsung dari tombol **"Katalog 32 Gambar AI & Prompt (GitHub)"** di bagian bawah halaman web.

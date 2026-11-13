@@ -6,24 +6,471 @@
     <title>KALA — Lilin Aromaterapi Sirkadian</title>
     <meta
       name="description"
-      content="Toko web lilin aromaterapi sirkadian dengan 12 komposisi kurasi, peracik lilin kustom, jurnal waktu bakar 4 jam, dan aset gambar AI siap-GitHub."
+      content="Toko web lilin aromaterapi sirkadian dengan 12 komposisi kurasi, peracik lilin kustom, jurnal waktu bakar 4 jam, dan 32 aset gambar AI."
     />
     <meta property="og:title" content="KALA — Lilin Aromaterapi Sirkadian" />
     <meta
       property="og:description"
-      content="Toko web lilin aromaterapi sirkadian dengan 12 komposisi kurasi, peracik lilin kustom, jurnal waktu bakar 4 jam, dan aset gambar AI siap-GitHub."
+      content="Toko web lilin aromaterapi sirkadian dengan 12 komposisi kurasi, peracik lilin kustom, jurnal waktu bakar 4 jam, dan 32 aset gambar AI."
     />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./app.js"></script>
   </head>
-  <body class="bg-[#F8F7F4] text-[#1A1B18] dark:bg-[#111210] dark:text-[#F2EFE9] antialiased selection:bg-[#B45309]/20 dark:selection:bg-[#E59A3C]/25">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body>
+    <!-- 1. TOP NAVIGATION BAR (3 ZONES) -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#top" class="brand-wordmark">KALA</a>
+
+        <nav class="main-nav" aria-label="Navigasi Utama">
+          <a href="#koleksi">Koleksi</a>
+          <a href="#atelier-studio">Racik Kustom</a>
+          <a href="#jurnal-bakar">Jurnal Bakar</a>
+          <a href="#tentang-tuang">Atelier</a>
+        </nav>
+
+        <div class="header-actions">
+          <button type="button" id="open-cart-btn" class="btn-cart">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span>Tas Belanja</span>
+            <span id="header-cart-count" class="mono-tabular">(0)</span>
+          </button>
+
+          <button
+            type="button"
+            id="mobile-menu-toggle"
+            class="btn-mobile-menu"
+            aria-label="Buka menu navigasi"
+            aria-expanded="false"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="4" x2="20" y1="7" y2="7" />
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="17" y2="17" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-nav" class="mobile-nav hidden" aria-label="Navigasi Seluler">
+        <a href="#koleksi">Koleksi</a>
+        <a href="#atelier-studio">Racik Kustom</a>
+        <a href="#jurnal-bakar">Jurnal Bakar</a>
+        <a href="#tentang-tuang">Atelier</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- 2. HERO SIRKADIAN -->
+      <section id="top" class="section-border">
+        <div class="container section-pad">
+          <div class="circadian-bar">
+            <div class="circadian-status">
+              <span id="phase-icon" class="phase-icon" aria-hidden="true"></span>
+              <span>Ritme Sirkadian Aktif</span>
+              <span aria-hidden="true">·</span>
+              <span id="phase-time-range" class="mono-tabular text-strong">05:30 – 09:30</span>
+            </div>
+
+            <div class="phase-tablist" role="tablist" aria-label="Pilih Fase Waktu Sirkadian" id="phase-tablist"></div>
+          </div>
+
+          <div class="hero-grid">
+            <div class="hero-copy-col">
+              <div class="hero-text-stack">
+                <p id="hero-kicker" class="eyebrow">Kejernihan Napas & Awal Hari · Atelier Jakarta</p>
+                <h1 id="hero-headline" class="hero-title">Menyambut pagi dengan kejernihan botani.</h1>
+                <p id="hero-lead" class="hero-lead"></p>
+              </div>
+
+              <div class="hero-spotlight">
+                <div class="spotlight-row">
+                  <div class="spotlight-product">
+                    <div class="spotlight-thumb">
+                      <img id="spotlight-img" src="./images/candle-embun-fajar.jpg" alt="Rekomendasi lilin" referrerpolicy="no-referrer" />
+                    </div>
+                    <div>
+                      <p id="spotlight-meta" class="meta-text">Rekomendasi Jam Ini · Botani</p>
+                      <h2 id="spotlight-name" class="spotlight-title">Embun Fajar</h2>
+                      <p id="spotlight-sub" class="meta-text">Bergamot Hijau · Eucalyptus · Teh Putih</p>
+                    </div>
+                  </div>
+                  <span id="spotlight-price" class="mono-tabular price-label">Rp 285.000</span>
+                </div>
+
+                <div class="spotlight-actions">
+                  <button type="button" id="spotlight-add-btn" class="btn-accent">
+                    Tambah Varian 180g ke Tas
+                  </button>
+                  <button type="button" id="spotlight-detail-btn" class="btn-outline">
+                    Buka Jurnal Bakar →
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-media-col">
+              <div class="hero-media-frame">
+                <img id="hero-img" src="./images/hero-fajar.jpg" alt="Suasana lilin aromaterapi KALA" referrerpolicy="no-referrer" />
+                <div class="media-scrim" aria-hidden="true"></div>
+                <div class="media-caption">
+                  <div>
+                    <p id="hero-media-phase" class="media-caption-sub">Fase Fajar · Pencahayaan Alami</p>
+                    <p id="hero-media-vessel" class="media-caption-title">Keramik Stoneware Glasir Celadon</p>
+                  </div>
+                  <span id="hero-media-hours" class="mono-tabular media-caption-sub">45–72 Jam Bakar</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="kpi-strip">
+            <div>
+              <p class="mono-tabular kpi-value">100% Nabati</p>
+              <p class="kpi-desc">Paduan kedelai organik & lilin lebah tanpa parafin</p>
+            </div>
+            <div>
+              <p class="mono-tabular kpi-value">45–82 Jam</p>
+              <p class="kpi-desc">Pembakaran lambat dengan kolam lelehan merata</p>
+            </div>
+            <div>
+              <p class="mono-tabular kpi-value">Minyak Murni</p>
+              <p class="kpi-desc">Ekstrak botani Nusantara & resin tanpa ftalat</p>
+            </div>
+            <div>
+              <p class="mono-tabular kpi-value">Wadah Ulang</p>
+              <p class="kpi-desc">Keramik stoneware & batu alam siap isi ulang</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. KOLEKSI KURASI (12 PRODUK) -->
+      <section id="koleksi" class="section-border">
+        <div class="container section-pad">
+          <div class="collection-header">
+            <div>
+              <p class="eyebrow">Koleksi Kurasi Sirkadian</p>
+              <h2 class="section-title">Dua belas komposisi untuk empat ritme hari.</h2>
+            </div>
+
+            <div class="search-box">
+              <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <input
+                type="search"
+                id="collection-search"
+                placeholder="Cari nama atau bahan aroma..."
+                aria-label="Cari produk lilin"
+              />
+            </div>
+          </div>
+
+          <div class="filter-toolbar">
+            <div class="phase-tablist" role="tablist" aria-label="Saring berdasarkan fase waktu" id="collection-phase-filters"></div>
+
+            <div class="family-filters" id="collection-family-filters">
+              <span class="meta-text">Keluarga:</span>
+            </div>
+          </div>
+
+          <div id="collection-grid" class="product-grid"></div>
+          <div id="collection-empty" class="empty-box hidden">
+            <p class="empty-title">Tidak ada varian yang sesuai dengan saringan ini.</p>
+            <p class="meta-text">Coba hapus kata kunci atau atur ulang fase waktu sirkadian.</p>
+            <button type="button" id="reset-filters-btn" class="btn-primary mt-4">Atur Ulang Filter</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. ATELIER RACIK LILIN KUSTOM -->
+      <section id="atelier-studio" class="section-border surface-alt">
+        <div class="container section-pad">
+          <div class="collection-header">
+            <div>
+              <p class="eyebrow">Atelier Racik Lilin Kustom</p>
+              <h2 class="section-title">Susun wadah, sumbu, dan tiga lapis minyak botani pribadi.</h2>
+            </div>
+            <p class="meta-text max-w-note">
+              Dituang khusus per pesanan dalam batch tunggal 220g menggunakan ekstrak botani murni dan ukiran label pilihan Anda.
+            </p>
+          </div>
+
+          <div class="composer-grid">
+            <div class="composer-controls card-surface">
+              <div>
+                <h3 class="control-heading">01. Pilih Material Wadah (220g)</h3>
+                <div id="vessel-options" class="vessel-grid"></div>
+              </div>
+
+              <div>
+                <h3 class="control-heading">02. Pilih Karakter Sumbu</h3>
+                <div id="wick-options" class="wick-grid"></div>
+              </div>
+
+              <div class="oil-layers-wrap">
+                <h3 class="control-heading">03. Susun Piramida Lapisan Aroma</h3>
+                <div id="oil-layers-container" class="oil-layers-stack"></div>
+              </div>
+
+              <div class="composer-bottom-row">
+                <div>
+                  <span class="control-sublabel">04. Konsentrasi Minyak Esensial</span>
+                  <div id="concentration-options" class="conc-grid"></div>
+                </div>
+                <div>
+                  <label for="engraving-input" class="control-sublabel">
+                    05. Ukiran Label Pribadi (Maks. 24 Karakter)
+                  </label>
+                  <input
+                    id="engraving-input"
+                    type="text"
+                    maxlength="24"
+                    value="RUANG TENANG"
+                    placeholder="Contoh: RUANG TENANG"
+                    class="text-input"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <aside class="composer-preview card-surface">
+              <div class="preview-photo-wrap">
+                <img id="custom-vessel-img" src="./images/vessel-keramik.jpg" alt="Pratinjau wadah kustom" referrerpolicy="no-referrer" />
+                <div class="media-scrim" aria-hidden="true"></div>
+                <div class="media-caption">
+                  <div>
+                    <p id="custom-vessel-label" class="media-caption-sub">Pratinjau Wadah · Keramik Tanah Liat</p>
+                    <p id="custom-engraving-preview" class="mono-tabular engraving-display">RUANG TENANG</p>
+                  </div>
+                  <span class="mono-tabular media-caption-sub">220g</span>
+                </div>
+              </div>
+
+              <div>
+                <p class="control-sublabel">Komposisi Bahan Terpilih</p>
+                <div id="custom-selected-oils" class="selected-oils-grid"></div>
+              </div>
+
+              <div class="composer-summary">
+                <div class="summary-line">
+                  <span class="meta-text">Sumbu Pilihan</span>
+                  <span id="custom-wick-summary" class="summary-val">Kapas Kepang Organik</span>
+                </div>
+                <div class="summary-line">
+                  <span class="meta-text">Estimasi Bakar</span>
+                  <span id="custom-burn-summary" class="summary-val">Pembakaran Hening · 48 Jam (220g)</span>
+                </div>
+                <div class="summary-total">
+                  <span>Total Racikan Kustom</span>
+                  <span id="custom-total-price" class="mono-tabular total-price">Rp 310.000</span>
+                </div>
+              </div>
+
+              <button type="button" id="add-custom-candle-btn" class="btn-accent btn-full">
+                Masukkan Racikan ke Tas Belanja
+              </button>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. JURNAL WAKTU BAKAR & ATELIER -->
+      <section id="jurnal-bakar">
+        <div class="container section-pad">
+          <div class="journal-grid">
+            <div>
+              <p class="eyebrow">Jurnal Waktu Bakar & Perawatan</p>
+              <h2 class="section-title">Merawat sumbu agar setiap lapis aroma bekerja utuh.</h2>
+              <div id="ritual-steps" class="ritual-list"></div>
+            </div>
+
+            <div class="journal-right-col">
+              <div id="tentang-tuang" class="atelier-card">
+                <div class="atelier-card-img">
+                  <img src="./images/ritual-atelier.jpg" alt="Proses penuangan manual lilin di studio KALA" referrerpolicy="no-referrer" />
+                </div>
+                <div class="atelier-card-body">
+                  <p class="eyebrow">Atelier Jakarta · Batch Kecil</p>
+                  <h3 class="atelier-card-title">Dituang Manual Pada Suhu Terukur</h3>
+                  <p class="meta-text leading-relaxed">
+                    Setiap wadah diisi pada suhu 62°C agar minyak esensial Nusantara tidak menguap sebelum sumbu dinyalakan, kemudian didiamkan 14 hari untuk penyatuan molekul.
+                  </p>
+                </div>
+              </div>
+
+              <div class="burn-log-card">
+                <h3 class="control-heading">Catatan Sesi Pembakaran Pribadi</h3>
+                <form id="burn-log-form" class="burn-log-form">
+                  <div class="form-2col">
+                    <div>
+                      <label for="log-candle-select" class="control-sublabel">Varian Lilin</label>
+                      <select id="log-candle-select" class="text-input"></select>
+                    </div>
+                    <div>
+                      <label for="log-duration-input" class="control-sublabel">Durasi Sesi (Menit)</label>
+                      <input id="log-duration-input" type="number" min="15" max="240" step="15" value="120" class="text-input mono-tabular" />
+                    </div>
+                  </div>
+                  <div>
+                    <label for="log-note-input" class="control-sublabel">Kesan Aroma & Suasana Ruangan</label>
+                    <div class="log-input-row">
+                      <input
+                        id="log-note-input"
+                        type="text"
+                        placeholder="Contoh: Menit 90, aroma teh putih terasa paling jernih saat hujan."
+                        class="text-input"
+                      />
+                      <button type="submit" class="btn-primary">Catat</button>
+                    </div>
+                  </div>
+                </form>
+
+                <div id="burn-log-list" class="burn-log-list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <span class="brand-wordmark footer-brand">KALA</span>
+          <p class="meta-text mt-1">
+            Studio Lilin Aromaterapi Sirkadian · Dituang manual dalam batch kecil di Jakarta.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <a href="#koleksi">Koleksi</a>
+          <a href="#atelier-studio">Racik Kustom</a>
+          <button type="button" id="open-asset-catalog-btn" class="btn-link-accent">
+            Katalog 32 Gambar AI & Prompt (GitHub)
+          </button>
+          <span class="meta-text">© 2026 KALA Atelier</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- MODAL DETAIL PRODUK & SCRUBBER 4 JAM -->
+    <div id="pdp-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="pdp-title">
+      <div class="modal-dialog pdp-dialog">
+        <button type="button" id="pdp-close-btn" class="modal-close-btn" aria-label="Tutup detail produk">✕</button>
+        <div class="pdp-grid">
+          <div class="pdp-left">
+            <div class="pdp-img-wrap">
+              <img id="pdp-img" src="./images/candle-embun-fajar.jpg" alt="" referrerpolicy="no-referrer" />
+            </div>
+            <div id="pdp-specs" class="pdp-specs"></div>
+          </div>
+
+          <div class="pdp-right">
+            <div class="pdp-purchase-box">
+              <p id="pdp-phase-meta" class="meta-text"></p>
+              <div class="pdp-title-row">
+                <h2 id="pdp-title" class="section-title-sm"></h2>
+                <span id="pdp-price" class="mono-tabular pdp-price"></span>
+              </div>
+              <p id="pdp-subtitle" class="meta-text"></p>
+
+              <div>
+                <span class="control-sublabel">Pilih Ukuran & Durasi Bakar</span>
+                <div id="pdp-variants" class="variant-grid"></div>
+              </div>
+
+              <div class="pdp-cta-row">
+                <span id="pdp-stock-label" class="stock-status">● Tersedia · Siap Kirim</span>
+                <button type="button" id="pdp-add-btn" class="btn-accent">
+                  Tambah ke Tas Belanja
+                </button>
+              </div>
+            </div>
+
+            <div class="pdp-scrubber-box">
+              <div class="scrubber-header">
+                <h3 class="control-heading">Jurnal Waktu Bakar & Evolusi Lapisan Aroma</h3>
+                <span id="scrubber-clock" class="mono-tabular eyebrow">Jam ke-01:00</span>
+              </div>
+              <p class="meta-text">
+                Geser penanda waktu dari penyalaan awal hingga jam ke-4 untuk melihat evolusi lapisan aroma di ruangan.
+              </p>
+
+              <input
+                type="range"
+                id="burn-scrubber-range"
+                min="0"
+                max="240"
+                step="15"
+                value="60"
+                aria-label="Simulasi menit pembakaran lilin"
+                class="range-slider"
+              />
+              <div class="scrubber-ticks mono-tabular">
+                <span>00:00 (Nyala)</span>
+                <span>01:00</span>
+                <span>02:00</span>
+                <span>03:00</span>
+                <span>04:00 (Batas)</span>
+              </div>
+
+              <div id="scrubber-bars" class="scrubber-bars"></div>
+              <div id="scrubber-telemetry" class="telemetry-grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL KATALOG 32 GAMBAR AI -->
+    <div id="asset-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="asset-modal-title">
+      <div class="modal-dialog asset-dialog">
+        <div class="asset-modal-head">
+          <div>
+            <h2 id="asset-modal-title" class="section-title-sm">Katalog 32 Aset Gambar AI & Prompt ChatGPT</h2>
+            <p class="meta-text mt-1">
+              Semua gambar di folder <code>images/</code> dibuat oleh AI tanpa unduhan eksternal. Ganti file lokal di folder <code>images/</code> dengan gambar ChatGPT sebelum atau sesudah diunggah ke GitHub.
+            </p>
+          </div>
+          <button type="button" id="asset-close-btn" class="modal-close-btn static-close" aria-label="Tutup katalog aset">✕</button>
+        </div>
+
+        <div id="asset-filter-tabs" class="asset-tabs"></div>
+        <div id="asset-list" class="asset-list"></div>
+      </div>
+    </div>
+
+    <!-- DRAWER TAS BELANJA & CHECKOUT -->
+    <div id="cart-backdrop" class="drawer-backdrop hidden" role="dialog" aria-modal="true" aria-label="Tas Belanja KALA">
+      <aside class="cart-drawer">
+        <div class="drawer-head">
+          <h2 id="cart-drawer-title" class="drawer-title">Tas Belanja</h2>
+          <button type="button" id="close-cart-btn" class="modal-close-btn static-close" aria-label="Tutup tas belanja">✕</button>
+        </div>
+
+        <div id="cart-step-view" class="drawer-body-wrap"></div>
+      </aside>
+    </div>
+
+    <!-- TOAST NOTIFIKASI -->
+    <div id="toast" class="toast hidden" role="status" aria-live="polite">
+      <span id="toast-text"></span>
+      <button type="button" id="toast-open-cart" class="toast-link">Lihat Tas</button>
+    </div>
   </body>
 </html>

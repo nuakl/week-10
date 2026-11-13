@@ -1,22 +1,33 @@
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import {defineConfig} from 'vite';
+import fs from 'node:fs';
+import path from 'node:path';
+import { defineConfig } from 'vite';
+
+function copyStaticAssetsPlugin() {
+  return {
+    name: 'copy-static-kala-assets',
+    closeBundle() {
+      const distDir = path.resolve(__dirname, 'dist');
+      const imagesSrc = path.resolve(__dirname, 'images');
+      const imagesDest = path.resolve(distDir, 'images');
+      const appSrc = path.resolve(__dirname, 'app.js');
+      const appDest = path.resolve(distDir, 'app.js');
+
+      if (fs.existsSync(imagesSrc)) {
+        fs.cpSync(imagesSrc, imagesDest, { recursive: true });
+      }
+      if (fs.existsSync(appSrc)) {
+        fs.copyFileSync(appSrc, appDest);
+      }
+    },
+  };
+}
 
 export default defineConfig(() => {
   return {
     base: './',
-    plugins: [react(), tailwindcss()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
-    },
+    plugins: [copyStaticAssetsPlugin()],
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
   };
